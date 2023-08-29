@@ -20,6 +20,90 @@ using System.Text;
 
 namespace TestModal.Blazor.Server.Controllers
 {
+
+    public class AppearanceListViewController : ViewController<ListView>
+    {
+        DxGridListEditor editor;
+        public AppearanceListViewController()
+        {
+
+        }
+        protected override void OnActivated()
+        {
+            base.OnActivated();
+
+
+        }
+        protected override void OnViewControlsCreated()
+        {
+            base.OnViewControlsCreated();
+            if (View.Editor is DxGridListEditor gridListEditor)
+            {
+                // Obtain the Component Adapter.
+                editor = gridListEditor;
+                IDxGridAdapter dataGridAdapter = editor.GetGridAdapter();
+                dataGridAdapter.GridModel.CustomizeElement = Grid_CustomizeElement;
+                dataGridAdapter.GridModel.ShowSearchBox = false;
+                dataGridAdapter.GridModel.ColumnResizeMode = GridColumnResizeMode.NextColumn;
+                dataGridAdapter.GridModel.SearchTextParseMode = GridSearchTextParseMode.GroupWordsByOr;
+                dataGridAdapter.GridModel.PagerVisible = true;
+                // dataGridAdapter.GridModel.FilterMenuButtonDisplayMode = GridFilterMenuButtonDisplayMode.Never;
+                dataGridAdapter.GridModel.CssClass = "table table-striped table-pagination table-hover bg-white border table-responsive";
+                dataGridAdapter.GridModel.AllowSort = true;
+                //dataGridAdapter.GridModel.DetailRowTemplate = CustomDateRenderer.Create(new CustomDateModel() { Value=DateTime.Now});
+                foreach (DxGridDataColumnModel column in dataGridAdapter.GridDataColumnModels)
+                {
+                    column.FilterMenuButtonDisplayMode = GridFilterMenuButtonDisplayMode.Never;
+                }
+
+
+            }
+
+        }
+        void Grid_CustomizeElement(GridCustomizeElementEventArgs e)
+        {
+            //if (e.ElementType == GridElementType.HeaderRow || e.ElementType == GridElementType.FooterRow || e.ElementType == GridElementType.PagerContainer)
+            //{
+            //    e.CssClass = "text-uppercase thead-light font-monospace";
+            //}
+
+            //// specific styles just for the header row. style the header cell individually using the cell classes below
+            //if (e.ElementType == GridElementType.HeaderRow)
+            //{
+            //    e.CssClass = "text-uppercase thead-light";
+            //}
+
+            //if (e.ElementType == GridElementType.HeaderCell || e.ElementType == GridElementType.HeaderSelectionCell)
+            //{
+            //    e.CssClass = "p-1";
+            //}
+
+            //if (e.ElementType == GridElementType.DataCell)
+            //{
+            //    e.CssClass = " px-2 py-3 font-primary fs-7 text-start";
+
+            //}
+
+            //if (e.ElementType == GridElementType.DataRow)
+            //{
+            //    e.CssClass = "";
+            //    e.Style = "cursor:pointer !important";
+            //}
+            //if (e.ElementType == GridElementType.DataRow && e.VisibleIndex % 2 == 1)
+            //{
+            //    e.CssClass = "";
+            //    e.Style = "cursor:pointer !important;";
+            //}
+
+            //if (e.ElementType == GridElementType.SelectionCell)
+            //{
+            //    e.CssClass = "";
+            //}
+
+        }
+    }
+
+
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
     public partial class ViewController1 : ViewController
     {
@@ -68,85 +152,5 @@ namespace TestModal.Blazor.Server.Controllers
         }
     }
 
-    public class AppearanceListViewController : ViewController<ListView>
-    {
-        DxGridListEditor editor;
-        public AppearanceListViewController()
-        {
-
-        }
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-
-
-        }
-        protected override void OnViewControlsCreated()
-        {
-            base.OnViewControlsCreated();
-            if (View.Editor is DxGridListEditor gridListEditor)
-            {
-                // Obtain the Component Adapter.
-                editor = gridListEditor;
-                IDxGridAdapter dataGridAdapter = editor.GetGridAdapter();
-                dataGridAdapter.GridModel.CustomizeElement = Grid_CustomizeElement;
-                dataGridAdapter.GridModel.ShowSearchBox = false;
-                dataGridAdapter.GridModel.ColumnResizeMode = GridColumnResizeMode.NextColumn;
-                dataGridAdapter.GridModel.SearchTextParseMode = GridSearchTextParseMode.GroupWordsByOr;
-                dataGridAdapter.GridModel.PagerVisible = true;
-                // dataGridAdapter.GridModel.FilterMenuButtonDisplayMode = GridFilterMenuButtonDisplayMode.Never;
-                dataGridAdapter.GridModel.CssClass = "table table-striped table-pagination table-hover bg-white border table-responsive";
-                dataGridAdapter.GridModel.AllowSort = true;
-                //dataGridAdapter.GridModel.DetailRowTemplate = CustomDateRenderer.Create(new CustomDateModel() { Value=DateTime.Now});
-                foreach (DxGridDataColumnModel column in dataGridAdapter.GridDataColumnModels)
-                {
-                    column.FilterMenuButtonDisplayMode = GridFilterMenuButtonDisplayMode.Never;
-                }
-
-
-            }
-
-        }
-        void Grid_CustomizeElement(GridCustomizeElementEventArgs e)
-        {
-            if (e.ElementType == GridElementType.HeaderRow || e.ElementType == GridElementType.FooterRow || e.ElementType == GridElementType.PagerContainer)
-            {
-                e.CssClass = "text-uppercase thead-light font-monospace";
-            }
-
-            // specific styles just for the header row. style the header cell individually using the cell classes below
-            if (e.ElementType == GridElementType.HeaderRow)
-            {
-                e.CssClass = "text-uppercase thead-light";
-            }
-
-            if (e.ElementType == GridElementType.HeaderCell || e.ElementType == GridElementType.HeaderSelectionCell)
-            {
-                e.CssClass = "p-1";
-            }
-
-            if (e.ElementType == GridElementType.DataCell)
-            {
-                e.CssClass = " px-2 py-3 font-primary fs-7 text-start";
-
-            }
-
-            if (e.ElementType == GridElementType.DataRow)
-            {
-                e.CssClass = "";
-                e.Style = "cursor:pointer !important";
-            }
-            if (e.ElementType == GridElementType.DataRow && e.VisibleIndex % 2 == 1)
-            {
-                e.CssClass = "";
-                e.Style = "cursor:pointer !important;";
-            }
-
-            if (e.ElementType == GridElementType.SelectionCell)
-            {
-                e.CssClass = "";
-            }
-
-        }
-    }
+   
 }
