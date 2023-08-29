@@ -105,52 +105,52 @@ namespace TestModal.Blazor.Server.Controllers
 
 
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
-    public partial class ViewController1 : ViewController
-    {
-        // Use CodeRush to create Controllers and Actions with a few keystrokes.
-        // https://docs.devexpress.com/CodeRushForRoslyn/403133/
-        public ViewController1()
-        {
-            InitializeComponent();
-            // Target required Views (via the TargetXXX properties) and create their Actions.
-        }
-        NewObjectViewController newObjectController;
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-            newObjectController = Frame.GetController<NewObjectViewController>();
-            if (newObjectController != null)
-            {
-                newObjectController.NewObjectAction.Execute += NewObjectAction_Execute;
-                // Perform various tasks depending on the target View.
-            }
-        }
+    //public partial class ViewController1 : ViewController
+    //{
+    //    // Use CodeRush to create Controllers and Actions with a few keystrokes.
+    //    // https://docs.devexpress.com/CodeRushForRoslyn/403133/
+    //    public ViewController1()
+    //    {
+    //        InitializeComponent();
+    //        // Target required Views (via the TargetXXX properties) and create their Actions.
+    //    }
+    //    NewObjectViewController newObjectController;
+    //    protected override void OnActivated()
+    //    {
+    //        base.OnActivated();
+    //        newObjectController = Frame.GetController<NewObjectViewController>();
+    //        if (newObjectController != null)
+    //        {
+    //            newObjectController.NewObjectAction.Execute += NewObjectAction_Execute;
+    //            // Perform various tasks depending on the target View.
+    //        }
+    //    }
 
-        private void NewObjectAction_Execute(object sender, SingleChoiceActionExecuteEventArgs e)
-        {
-            IObjectSpace objectSpace = Application.CreateObjectSpace();
+    //    private void NewObjectAction_Execute(object sender, SingleChoiceActionExecuteEventArgs e)
+    //    {
+    //        IObjectSpace objectSpace = Application.CreateObjectSpace();
 
 
-            if (e.SelectedChoiceActionItem.Caption == "Role")//if (View.ObjectTypeInfo.Type == typeof(Client) || View.Id == "Client_LookupListView")
-            {
-                PermissionPolicyRole test = objectSpace.CreateObject<PermissionPolicyRole>();
-                DetailView detailView = Application.CreateDetailView(objectSpace, test);
-                e.ShowViewParameters.TargetWindow = TargetWindow.NewModalWindow;
-                e.ShowViewParameters.CreatedView = detailView;
+    //        if (e.SelectedChoiceActionItem.Caption == "Role")//if (View.ObjectTypeInfo.Type == typeof(Client) || View.Id == "Client_LookupListView")
+    //        {
+    //            PermissionPolicyRole test = objectSpace.CreateObject<PermissionPolicyRole>();
+    //            DetailView detailView = Application.CreateDetailView(objectSpace, test);
+    //            e.ShowViewParameters.TargetWindow = TargetWindow.NewModalWindow;
+    //            e.ShowViewParameters.CreatedView = detailView;
 
-            }
-        }
-        protected override void OnViewControlsCreated()
-        {
-            base.OnViewControlsCreated();
-            // Access and customize the target View control.
-        }
-        protected override void OnDeactivated()
-        {
-            // Unsubscribe from previously subscribed events and release other references and resources.
-            base.OnDeactivated();
-        }
-    }
+    //        }
+    //    }
+    //    protected override void OnViewControlsCreated()
+    //    {
+    //        base.OnViewControlsCreated();
+    //        // Access and customize the target View control.
+    //    }
+    //    protected override void OnDeactivated()
+    //    {
+    //        // Unsubscribe from previously subscribed events and release other references and resources.
+    //        base.OnDeactivated();
+    //    }
+    //}
 
    
 }
